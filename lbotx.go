@@ -11,6 +11,7 @@ import (
 
 	"strings"
 
+	"github.com/gin-gonic/gin"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -117,6 +118,10 @@ func (b *Bot) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}
+}
+
+func (b *Bot) Gin(context gin.Context) {
+	b.ServeHTTP(context.Writer, context.Request)
 }
 
 func (c *BotContext) Set(name string, value interface{}) {
