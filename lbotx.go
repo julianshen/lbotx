@@ -120,8 +120,10 @@ func (b *Bot) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func (b *Bot) Gin(context gin.Context) {
-	b.ServeHTTP(context.Writer, context.Request)
+func (b *Bot) Gin() func(gin.Context) {
+	return func(context gin.Context) {
+		b.ServeHTTP(context.Writer, context.Request)
+	}
 }
 
 func (c *BotContext) Set(name string, value interface{}) {
