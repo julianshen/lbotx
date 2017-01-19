@@ -65,6 +65,14 @@ func (mb *MessageBank) AddImageMessage(contentUrl, previewUrl string) error {
 	return mb.AddMessage(linebot.NewImageMessage(contentUrl, previewUrl))
 }
 
+func (mb *MessageBank) Len() int {
+	if mb.messages == nil {
+		return 0
+	}
+
+	return len(mb.messages)
+}
+
 func (mb *MessageBank) reply(reply_token string) error {
 	if len(mb.messages) > 0 {
 		if _, err := mb.bot.ReplyMessage(reply_token, mb.messages...).Do(); err != nil {
